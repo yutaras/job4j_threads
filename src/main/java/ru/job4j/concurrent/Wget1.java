@@ -31,7 +31,7 @@ public class Wget1 implements Runnable {
                 if (byteWrite > speed) {
                     long delta = System.currentTimeMillis() - start;
                     if (delta < 1000) {
-                        Thread.sleep(1000);
+                        Thread.sleep(delta);
                     }
                     start = System.currentTimeMillis();
                     byteWrite = 0;
@@ -42,13 +42,17 @@ public class Wget1 implements Runnable {
         }
     }
 
+    public static void validation(String[] args) {
+        if (args.length != 3) {
+            throw new IllegalArgumentException("Количество аргументов не равно трем");
+        }
+    }
+
     public static void main(String[] args) throws InterruptedException {
-        /*String url = args[0];
+        validation(args);
+        String url = args[0];
         int speed = Integer.parseInt(args[1]);
-        String file = args[2];*/
-        String url = "https://proof.ovh.net/files/10Mb.dat";
-        String file = "C:/projects/job4j_threads/data/10Mb.dat";
-        int speed = 1024 * 1024; /*ограничивать скорость до 1 мегабайта в секунду*/
+        String file = args[2];
         Thread wget = new Thread(new Wget1(url, speed, file));
         wget.start();
         wget.join();
