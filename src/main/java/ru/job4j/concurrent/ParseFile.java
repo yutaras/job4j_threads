@@ -40,17 +40,17 @@ public class ParseFile {
     }*/
 
     public String content(Predicate<Character> filter) {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         try (BufferedInputStream in = new BufferedInputStream(new FileInputStream(file))) {
             int data;
-            while ((data = in.read()) > 0) {
+            while ((data = in.read()) != -1) {
                 if (filter.test((char) data)) {
-                    output += (char) data;
+                    output.append((char) data);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return output;
+        return output.toString();
     }
 }
