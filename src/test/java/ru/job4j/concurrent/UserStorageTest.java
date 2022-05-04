@@ -34,6 +34,6 @@ public class UserStorageTest {
         assertTrue(userStorage.add(user1));
         assertTrue(userStorage.add(user2));
         assertTrue(userStorage.update(user1New));
-        assertTrue(userStorage.transfer(1,2, 60));
+        assertTrue(userStorage.transfer(1, 2, 60));
     }
 }
