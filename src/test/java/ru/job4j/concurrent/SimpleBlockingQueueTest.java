@@ -8,16 +8,24 @@ import static org.hamcrest.core.Is.is;
 public class SimpleBlockingQueueTest {
 
     @Test
-    public void whenProducerConsumer() {
-        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(10);
+    public void whenProducerConsumer() throws InterruptedException {
+        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>();
         Thread producer = new Thread(
                 () -> {
-                    queue.offer(6);
+                    try {
+                        queue.offer(6);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
         );
         Thread consumer = new Thread(
                 () -> {
-                    queue.poll();
+                    try {
+                        queue.poll();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
         );
         producer.start();
