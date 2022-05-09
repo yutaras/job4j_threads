@@ -12,6 +12,10 @@ public class SimpleBlockingQueue<T> {
     @GuardedBy("this")
     private Queue<T> queue = new LinkedList<>();
 
+    public SimpleBlockingQueue(int limit) {
+        this.limit = limit;
+    }
+
     public synchronized void offer(T value) {
         while (queue.size() == limit) {
             try {
