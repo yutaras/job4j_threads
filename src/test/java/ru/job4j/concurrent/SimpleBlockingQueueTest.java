@@ -8,7 +8,7 @@ import static org.hamcrest.core.Is.is;
 public class SimpleBlockingQueueTest {
 
     @Test
-    public void WhenProducerConsumer() {
+    public void whenProducerConsumer() {
         SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(10);
         Thread producer = new Thread(
                 () -> {
