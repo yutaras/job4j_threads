@@ -8,10 +8,14 @@ import java.util.Queue;
 
 @ThreadSafe
 public class SimpleBlockingQueue<T> {
-    private int limit = 10;
+    private int limit;
     @GuardedBy("this")
     private Queue<T> queue = new LinkedList<>();
 
+
+    public SimpleBlockingQueue(int limit) {
+        this.limit = limit;
+    }
 
     public synchronized void offer(T value) throws InterruptedException {
         while (queue.size() == limit) {
@@ -22,9 +26,15 @@ public class SimpleBlockingQueue<T> {
     }
 
     public synchronized T poll() throws InterruptedException {
-        while (queue.size() == 0) {
+        while (isEmpty()) {
             wait();
         }
-        return queue.remove();
+        T rsl = queue.remove();
+        notifyAll();
+        return rsl;
+    }
+
+    public boolean isEmpty() {
+        return queue.size() == 0;
     }
 }
