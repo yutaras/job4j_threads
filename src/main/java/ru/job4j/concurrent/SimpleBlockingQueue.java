@@ -34,7 +34,7 @@ public class SimpleBlockingQueue<T> {
         return rsl;
     }
 
-    public boolean isEmpty() {
+    public synchronized boolean isEmpty() {
         return queue.size() == 0;
     }
 }
