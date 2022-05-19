@@ -19,7 +19,7 @@ public class ParallelSearchIndex extends RecursiveTask<Integer> {
 
     public int indexOf() {
         int rst = -1; /* если элемента нет в массиве, то возвращаем -1. */
-        for (int index = 0; index < array.length; index++) {
+        for (int index = from; index <= to; index++) {
             if (array[index] == el) {
                 rst = index;
                 break;
@@ -29,7 +29,7 @@ public class ParallelSearchIndex extends RecursiveTask<Integer> {
     }
 
     protected Integer compute() {
-        if (from - to < 10) {
+        if (from - to < 11) {
             return indexOf();
         }
         int mid = (from + to) / 2;
