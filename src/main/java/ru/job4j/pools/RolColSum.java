@@ -3,6 +3,8 @@ package ru.job4j.pools;
 /*Дан каркас класса. Ваша задача подсчитать суммы по строкам и столбцам квадратной матрицы.*/
 
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class RolColSum {
     public static class Sums {
@@ -64,8 +66,28 @@ public class RolColSum {
         return rsl;
     }
 
-    public static Sums[] asyncSum(int[][] matrix) {
-        return null;
+    public static Sums[] asyncSum1(int[][] matrix) throws ExecutionException, InterruptedException {
+        int n = matrix.length;
+        Sums[] rsl = new Sums[n];
+        for (int i = 0; i < n; i++) {
+            int finalI = i;
+            CompletableFuture<Integer> rowSum = CompletableFuture.supplyAsync(() -> {
+                int rowS = 0;
+                for (int j = 0; j < n; j++) {
+                    rowS += matrix[finalI][j];
+                }
+                return rowS;
+            });
+            CompletableFuture<Integer> colSum = CompletableFuture.supplyAsync(() -> {
+                int colS = 0;
+                for (int[] ints : matrix) {
+                    colS += ints[finalI];
+                }
+                return colS;
+            });
+            rsl[i] = new Sums(rowSum.get(), colSum.get());
+        }
+        return rsl;
     }
 
 }
