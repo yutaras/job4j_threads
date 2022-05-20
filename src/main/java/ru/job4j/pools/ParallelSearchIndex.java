@@ -29,7 +29,7 @@ public class ParallelSearchIndex<T> extends RecursiveTask<Integer> {
     }
 
     protected Integer compute() {
-        if (from - to < 11) {
+        if (to - from < 11) {
             return indexOf();
         }
         int mid = (from + to) / 2;
