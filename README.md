@@ -9,4 +9,4 @@
 *  Non Blocking Algorithm: CAS - операции.
 *  Пулы: ThreadSafe Singleton, ForkJoinPool, CompletableFuture.
 
-Объединение зафиксированных измененEй
+Объединение зафиксированных измененEtй
