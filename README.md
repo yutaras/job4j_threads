@@ -10,3 +10,4 @@
 *  Пулы: ThreadSafe Singleton, ForkJoinPool, CompletableFuture.
 
 Объединение зафиксированных изменений
+В курсе производилась работа с ветками git.
